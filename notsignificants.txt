@@ -3134,7 +3134,7 @@ until
 provided that
 assuming that
 even if
-in case (that)
+in case
 lest
 than
 rather than
@@ -3157,7 +3157,7 @@ while
 because
 since
 so that
-in order (that)
+in order 
 why
 that
 what
