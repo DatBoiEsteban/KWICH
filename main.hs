@@ -18,8 +18,9 @@ main = do
   titlesList <- getTitles ti
   hClose ti
   let f = map (kwicTitles hashNotSignificants) titlesList
-  printaso f
-  putStrLn (show f)
+  let g = sortBy sortTitles f
+  printaso g
+  putStrLn (show g)
 
 printaso :: [[String]] -> IO ()
 printaso x = sequence_ (map printaso_2 x)
@@ -77,4 +78,9 @@ sep xs = init xs ++ [last xs ++ " ><"]
 
 kwicTitles :: NotSignificant -> [[Char]] -> [[Char]]
 kwicTitles notS title =
-  map putSpaces (titSigRotations notS (sep title))
+  nub (map putSpaces (titSigRotations notS (sep title)))
+
+sortTitles :: [[Char]] -> [[Char]] -> Ordering
+sortTitles = (\(x : xs) (y : ys) -> compare (head x) (head y))
+
+a (z : zs) = putStrLn (head z)
