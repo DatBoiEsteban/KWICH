@@ -17,9 +17,14 @@ main = do
   ti <- openFile (tokens !! 1) ReadMode
   titlesList <- getTitles ti
   hClose ti
-  let k = titSigRotations (titlesList !! 23) hashNotSignificants
-  let f = kwicTitles (k !! 0) hashNotSignificants
+  let f = map (kwicTitles hashNotSignificants) titlesList
+  printaso f
   putStrLn (show f)
+
+printaso :: [[String]] -> IO ()
+printaso x = sequence_ (map printaso_2 x)
+
+printaso_2 x = sequence_ (map putStrLn x)
 
 getNotSignificantWords :: Handle -> IO NotSignificant
 getNotSignificantWords inh = do
@@ -59,8 +64,8 @@ toWords (x : xs)
   | x == ' ' = toWords (dropWhile (' ' ==) xs)
   | otherwise = (x : takeWhile (' ' /=) xs) : toWords (dropWhile (' ' /=) xs)
 
-titSigRotations :: [[Char]] -> NotSignificant -> [[[Char]]]
-titSigRotations xs notSignificants = xs : [drop i xs ++ take i xs | i <- [0 .. n], not ((map toLower (xs !! i)) `elem` notSignificants)]
+titSigRotations :: NotSignificant -> [[Char]] -> [[[Char]]]
+titSigRotations notSignificants xs = xs : [drop i xs ++ take i xs | i <- [0 .. n], not ((map toLower (xs !! i)) `elem` notSignificants)]
   where
     n = (length xs) - 1
 
@@ -70,6 +75,6 @@ putSpaces xss = tail (concat (map (' ' :) xss))
 sep :: [[Char]] -> [[Char]]
 sep xs = init xs ++ [last xs ++ " ><"]
 
-kwicTitles :: [[Char]] -> NotSignificant -> [[Char]]
-kwicTitles title notS =
-  map putSpaces (titSigRotations (sep title) notS)
+kwicTitles :: NotSignificant -> [[Char]] -> [[Char]]
+kwicTitles notS title =
+  map putSpaces (titSigRotations notS (sep title))
