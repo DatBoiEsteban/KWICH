@@ -34,7 +34,6 @@ Animal Farm
 The Great Gatsby
 The Little Prince
 The Call of the Wild
-20,000 Leagues Under the Sea
 Anna Karenina
 The Wind in the Willows
 The Picture of Dorian Gray
@@ -70,7 +69,6 @@ The Trial
 Lady Chatterley's Lover
 Kidnapped: The Adventures of David Balfour
 The Catcher in the Rye
-Fahrenheit 451
 A Journey to the Center of the Earth
 Vanity Fair
 All Quiet on the Western Front
@@ -115,7 +113,6 @@ The Color Purple
 Northanger Abbey
 East of Eden
 On the Road
-Catch-22
 Around the World in Eighty Days
 Hard Times
 Beloved
@@ -364,7 +361,6 @@ The Spy Who Came In from the Cold
 A Game of Thrones
 The Thorn Birds
 Old Yeller
-Ramona Quimby, Age 8
 Death In Venice
 By the Shores of Silver Lake
 Inferno
@@ -423,7 +419,6 @@ When You Reach Me
 Carrie
 The Moon and Sixpence
 The Higher Power of Lucky
-Looking Backward, 2000-1887
 The Wings of the Dove
 The Summer of the Swans
 Dangerous Liaisons
@@ -439,7 +434,6 @@ Arrowsmith
 Julie of the Wolves
 The Screwtape Letters
 The Fall
-The No. 1 Ladies' Detective Agency
 Worst Case
 Lost Horizon
 The Gunslinger

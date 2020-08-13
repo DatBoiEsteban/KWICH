@@ -1,63 +1,38 @@
-Cien años de soledad
 El señor de los anillos
 Un mundo feliz
-Orgullo y prejuicio
-Crimen y castigo
-Lolita
-Ulises
-Madame Bovary
-En busca del tiempo perdido
-Don Quijote de la Mancha
 El retrato de Dorian Gray
-Ana Karenina
 El Principito
-El proceso
-El ruido y la furia
-Hamlet
 Lo que el viento se llevó
-La Odisea
 Las uvas de la ira
 El guardián entre el centeno
-Cumbres borrascosas
 El gran Gatsby
 Mil soles espléndidos
 Alicia en el país de las maravillas
 Rebelión en la granja
 Los pilares de la tierra
-Guerra y paz
 Memorias de una geisha
 Frankenstein
-Los viajes de Gulliver
 La ladrona de libros
 Matar a un ruiseñor
 El conde de Montecristo
 Los juegos del hambre
 Harry Potter y la piedra filosofal
 El señor de las moscas
-Moby Dick
 Los miserables
-Las aventuras de Huckleberry Finn
-Tristam Shandy
 Drácula
 El nombre de la rosa
-El extranjero
-Los hermanos Karamázov
-El amor en los tiempos del cólera
 Harry Potter y las reliquias de la muerte
 El código Da Vinci
 Harry Potter y el prisionero de Azkaban
 Cometas en el cielo
-Ensayo sobre la ceguera
 Las crónicas de Narnia
 Los renglones torcidos de Dios
 En llamas
 Harry Potter y el cáliz de fuego
 La sombra del viento
-Viaje al fin de la noche
 Harry Potter y el misterio del príncipe
 El juego de Ender
 La Biblia
-La montaña mágica
 Harry Potter y la Orden del Fénix
 El psicoanalista
 Trampa
@@ -66,11 +41,8 @@ Dr. Jekyll y Mr. Hyde
 El médico
 La metamorfosis
 La telaraña de Carlota
-La divina comedia
-La señora Dalloway
 Crepúsculo
 En el camino
-La Iliada
 Jane Eyre
 El Diario de Ana Frank
 El retorno del Rey
@@ -79,15 +51,12 @@ Crónica de una muerte anunciada
 La casa de los espíritus
 Mientras agonizo
 La isla del tesoro
-Todo se desmorona
 Emma
 Pasaje a la India
-Ficciones
 Harry Potter y la cámara secreta
 A sangre fría
 Rimas y leyendas
 El corazón es un cazador solitario
-El Rey Lear
 Tormenta de espadas
 Juego de tronos
 La catedral del mar
@@ -96,3 +65,98 @@ El corazón de las tinieblas
 Robinson Crusoe
 La isla de los amores infinitos
 David Copperfield
+Poema de Gilgamesh
+Libro de Job 
+Las mil y una noches
+Saga de Njál
+Todo se desmorona
+Cuentos infantiles
+La Divina Comedia
+Orgullo y prejuicio
+Papá Gorio
+Molloy, Malone muere, El Innombrable, una trilogía
+Decamerón
+Ficciones
+Cumbres Borrascosas
+El extranjero
+Poemas
+Viaje al fin de la noche
+Don Quijote de la Mancha
+Los cuentos de Canterbury
+Relatos cortos
+Nostromo
+Grandes Esperanzas
+Jacques el fatalista
+Berlin Alexanderplatz
+Crimen y castigo
+El idiota
+Los endemoniados
+Los hermanos Karamazov
+Middlemarch
+El hombre invisible
+Medea
+¡Absalom, Absalom!
+El ruido y la furia
+Madame Bovary
+La educación sentimental
+Romancero gitano
+Cien años de soledad
+El amor en los tiempos del cólera
+Fausto
+Almas muertas
+El tambor de hojalata
+Gran Sertón: Veredas
+Hambre
+El viejo y el mar
+Ilíada
+Odisea
+Casa de muñecas
+Ulises
+El proceso
+El castillo
+Shakuntala
+El sonido de la montaña
+Zorba, el griego
+Hijos y amantes
+Gente independiente
+El cuaderno dorado
+Pippi Calzaslargas
+Diario de un loco
+Hijos de nuestro barrio
+Los Buddenbrook
+La montaña mágica
+Moby-Dick
+La historia
+Beloved
+Genji Monogatari
+El hombre sin atributos
+Lolita
+Las metamorfosis
+Libro del desasosiego
+En busca del tiempo perdido
+Gargantúa y Pantagruel
+Pedro Páramo
+Masnavi
+Hijos de la medianoche
+Bostan
+Tiempo de migrar al norte
+Ensayo sobre la ceguera
+Hamlet
+El rey Lear
+Otelo
+Edipo rey
+Rojo y negro
+Vida y opiniones del caballero Tristram Shandy
+La conciencia de Zeno
+Los viajes de Gulliver
+Guerra y paz
+Ana Karenina
+La muerte de Iván Ilich
+Las aventuras de Huckleberry Finn
+Ramayana
+Eneida
+Mahabhárata
+Hojas de hierba
+La señora Dallowa
+Al faro
+Memorias de Adriano
