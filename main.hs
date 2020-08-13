@@ -8,18 +8,17 @@ import Prelude
 
 type NotSignificant = HashSet [Char]
 
+cargarHash :: FilePath -> IO NotSignificant
 cargarHash fileName = do
   ns <- readFile fileName
-  let hashNotSignificants = getNotSignificantWords ns
-  hClose ns
-  hashNotSignificants
+  let notSignificant = getNotSignificantWords ns
+  return notSignificant
 
 cargarTitulos :: FilePath -> IO [[[Char]]]
 cargarTitulos fileName = do
-  ti <- openFile fileName ReadMode
+  ti <- readFile fileName
   let titlesList = getTitles ti
-  hClose ti
-  titlesList
+  return titlesList
 
 crearArchivos :: [Char] -> IO ()
 crearArchivos datos = do
@@ -28,6 +27,7 @@ crearArchivos datos = do
   hisf <- doesFileExist (tokens !! 0)
   if hisf
     then do
+      putStrLn "JUEPUTA PUTA"
       crearArchivos datos
     else do
       writeFile (tokens !! 0) datos
@@ -40,29 +40,20 @@ main = do
   titlesList <- cargarTitulos (tokens !! 1)
   let titulosYRotaciones = concat (map (kwicTitles hashNotSignificants) titlesList)
   let enOrden = sortBy sortTitles titulosYRotaciones
-  printaso enOrden
-  crearArchivos (show enOrden)
+  crearArchivos (intercalate "\n" enOrden)
 
 printaso :: [String] -> IO ()
 printaso x = sequence_ (map putStrLn x)
 
+getNotSignificantWords :: [Char] -> NotSignificant
 getNotSignificantWords inh = do
-  words <- getNotSignificantWordsAux inh []
-  let hashpals = HashSet.fromList words
-  return hashpals
+  let words = map (map toLower) (splitOn "\n" inh)
+  HashSet.fromList words
 
-getNotSignificantWordsAux inh words = do
-  ineof <- hIsEOF inh
-  if ineof
-    then do
-      return words
-    else do
-      inpStr <- hGetLine inh
-      let minus = map toLower inpStr
-      getNotSignificantWordsAux inh (words ++ [minus])
-
-getTitles :: Handle -> IO [[[Char]]]
-getTitles inh = getTitlesAux inh []
+getTitles :: [Char] -> [[[Char]]]
+getTitles inh = do
+  let titles = map (map toLower) (splitOn "\n" inh)
+  map (splitOn " ") titles
 
 getTitlesAux :: Handle -> [[[Char]]] -> IO [[[Char]]]
 getTitlesAux inh titles = do
