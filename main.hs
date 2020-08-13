@@ -1,39 +1,56 @@
 import Data.Char
 import Data.HashSet as HashSet hiding (map, sort)
 import Data.List
+import Data.List.Split
+import System.Directory
 import System.IO
 import Prelude
 
 type NotSignificant = HashSet [Char]
 
+cargarHash fileName = do
+  ns <- readFile fileName
+  let hashNotSignificants = getNotSignificantWords ns
+  hClose ns
+  hashNotSignificants
+
+cargarTitulos :: FilePath -> IO [[[Char]]]
+cargarTitulos fileName = do
+  ti <- openFile fileName ReadMode
+  let titlesList = getTitles ti
+  hClose ti
+  titlesList
+
+crearArchivos :: [Char] -> IO ()
+crearArchivos datos = do
+  inpStr <- getLine
+  let tokens = words inpStr
+  hisf <- doesFileExist (tokens !! 0)
+  if hisf
+    then do
+      crearArchivos datos
+    else do
+      writeFile (tokens !! 0) datos
+
 main :: IO ()
 main = do
   inpStr <- getLine
   let tokens = words inpStr
-  let filename = head tokens
-  ns <- openFile filename ReadMode
-  hashNotSignificants <- getNotSignificantWords ns
-  hClose ns
-  ti <- openFile (tokens !! 1) ReadMode
-  titlesList <- getTitles ti
-  hClose ti
-  let f = map (kwicTitles hashNotSignificants) titlesList
-  let g = sortBy sortTitles f
-  printaso g
-  putStrLn (show g)
+  hashNotSignificants <- cargarHash (tokens !! 0)
+  titlesList <- cargarTitulos (tokens !! 1)
+  let titulosYRotaciones = concat (map (kwicTitles hashNotSignificants) titlesList)
+  let enOrden = sortBy sortTitles titulosYRotaciones
+  printaso enOrden
+  crearArchivos (show enOrden)
 
-printaso :: [[String]] -> IO ()
-printaso x = sequence_ (map printaso_2 x)
+printaso :: [String] -> IO ()
+printaso x = sequence_ (map putStrLn x)
 
-printaso_2 x = sequence_ (map putStrLn x)
-
-getNotSignificantWords :: Handle -> IO NotSignificant
 getNotSignificantWords inh = do
   words <- getNotSignificantWordsAux inh []
   let hashpals = HashSet.fromList words
   return hashpals
 
-getNotSignificantWordsAux :: Handle -> [[Char]] -> IO [[Char]]
 getNotSignificantWordsAux inh words = do
   ineof <- hIsEOF inh
   if ineof
@@ -80,7 +97,5 @@ kwicTitles :: NotSignificant -> [[Char]] -> [[Char]]
 kwicTitles notS title =
   nub (map putSpaces (titSigRotations notS (sep title)))
 
-sortTitles :: [[Char]] -> [[Char]] -> Ordering
-sortTitles = (\(x : xs) (y : ys) -> compare (head x) (head y))
-
-a (z : zs) = putStrLn (head z)
+sortTitles :: [Char] -> [Char] -> Ordering
+sortTitles = (\(x : xs) (y : ys) -> compare x y)
