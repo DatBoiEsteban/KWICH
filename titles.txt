@@ -63,7 +63,6 @@ The Prince and the Pauper
 A Portrait of the Artist as a Young Man
 Lord Jim
 Harry Potter and the Chamber of Secrets
-The Red & the Black
 The Stranger
 The Trial
 Lady Chatterley's Lover
@@ -154,7 +153,6 @@ The Metamorphosis
 The Magic Mountain (Der Zauberberg)
 James and the Giant Peach
 The Horse and His Boy
-Angels & Demons
 The Voyage of the Dawn Treader
 The Bell Jar
 Women in Love

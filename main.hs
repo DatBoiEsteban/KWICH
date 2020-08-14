@@ -1,7 +1,9 @@
 import Data.Char
+import Data.Function
 import Data.HashSet as HashSet hiding (map, sort)
 import Data.List
 import Data.List.Split
+import Data.Ord
 import System.Directory
 import System.IO
 import Prelude
@@ -34,6 +36,16 @@ crearArchivos datos = do
 
 main :: IO ()
 main = do
+  inpStr <- getLine
+  let tokens = words inpStr
+  hashNotSignificants <- cargarHash (tokens !! 0)
+  titlesList <- cargarTitulos (tokens !! 1)
+  let titulosYRotaciones = concat (map (kwicTitles hashNotSignificants) titlesList)
+  let enOrden = sortBy sortTitles titulosYRotaciones
+  crearArchivos (intercalate "\n" (alignOn (map laMayus enOrden)))
+
+main2 :: IO ()
+main2 = do
   inpStr <- getLine
   let tokens = words inpStr
   hashNotSignificants <- cargarHash (tokens !! 0)
@@ -74,7 +86,7 @@ toWords (x : xs)
   | otherwise = (x : takeWhile (' ' /=) xs) : toWords (dropWhile (' ' /=) xs)
 
 titSigRotations :: NotSignificant -> [[Char]] -> [[[Char]]]
-titSigRotations notSignificants xs = xs : [drop i xs ++ take i xs | i <- [0 .. n], not ((map toLower (xs !! i)) `elem` notSignificants)]
+titSigRotations notSignificants xs = [drop i xs ++ take i xs | i <- [0 .. n], not ((map toLower (xs !! i)) `elem` notSignificants)]
   where
     n = (length xs) - 1
 
@@ -90,3 +102,18 @@ kwicTitles notS title =
 
 sortTitles :: [Char] -> [Char] -> Ordering
 sortTitles = (\(x : xs) (y : ys) -> compare x y)
+
+alignOn lines = map padline lines
+  where
+    partBeforechar = head . splitWhen isUpper
+    longestLengthBeforeChar = maximum $ map (length . partBeforechar) lines
+    padline line = replicate offset ' ' ++ line
+      where
+        offset = longestLengthBeforeChar - (length (partBeforechar line))
+
+laMayus x = do
+  let a = splitOn "><" x
+  let b = splitOn " " (a !! 0)
+  let c = map toUpper (b !! 0)
+  let d = unwords . words
+  d ((a !! 1) ++ " " ++ c ++ " " ++ (intercalate " " (tail b)))
