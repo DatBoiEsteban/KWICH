@@ -4,7 +4,6 @@ Description :  This program creates a KWIC index with the significant words of b
 Copyright   :  Esteban Mata, Esteban Salas and Walter López. 
 License     :  Tecnológico de Costa Rica.
 
-Maintainer  :  esteban1113001@gmail.com
 Stability   :  stable | experimental | research
 Portability :  portable 
 -}
@@ -22,7 +21,7 @@ import Prelude
 type NotSignificant = HashSet [Char]
 
 
--- |La función cargarHash rellena el HashSet de palabras no significativa desde un archivo de texto.
+-- |Rellena el HashSet de palabras no significativas desde un archivo de texto.
 cargarHash :: FilePath -> IO NotSignificant
 cargarHash fileName = do
   ns <- readFile fileName
@@ -30,7 +29,7 @@ cargarHash fileName = do
   return notSignificant
 
 
--- |La función cargarTitulos rellena una lista con títulos desde un archivo de texto.
+-- |Rellena una lista con títulos desde un archivo de texto.
 cargarTitulos :: FilePath -> IO [[[Char]]]
 cargarTitulos fileName = do
   ti <- readFile fileName
@@ -38,7 +37,7 @@ cargarTitulos fileName = do
   return titlesList
 
 
--- |La función crearArchivos crear el archivo.txt de salida para imprimir el indice.
+-- |Crea el archivo.txt de salida para imprimir el índice.
 crearArchivos :: [Char] -> IO ()
 crearArchivos datos = do
   inpStr <- getLine
@@ -52,7 +51,7 @@ crearArchivos datos = do
       writeFile (tokens !! 0) datos
 
 
--- |La función kwicAlineado genera el indice kwic con la salida alineada en cada palabra que inicia las rotaciones (y las coloca en mayúcula).
+-- |Genera el índice kwic con la salida alineada en cada palabra que inicia las rotaciones (y las coloca en mayúscula).
 kwicAlineado :: IO ()
 kwicAlineado = do
   inpStr <- getLine
@@ -64,7 +63,7 @@ kwicAlineado = do
   crearArchivos (intercalate "\n" (alignOn (map laMayus enOrden)))
 
 
--- |La función kwicStandard genera el indice kwic standard con los separadores <>.
+-- |Genera el índice kwic standard (con los separadores <>).
 kwicStandard :: IO ()
 kwicStandard = do
   inpStr <- getLine
@@ -76,76 +75,54 @@ kwicStandard = do
   crearArchivos (intercalate "\n" enOrden)
 
 
--- |La función print imprime en la pantalla.
+-- |Imprime en la pantalla.
 print :: [String] -> IO ()
 print x = sequence_ (map putStrLn x)
 
 
--- |La función getNotSignificantWords obtiene las palabras no significativas, las convierte a minúscula y las inserta en un HashSet.
+-- |Obtiene las palabras no significativas, las convierte en minúscula y las inserta en un HashSet.
 getNotSignificantWords :: [Char] -> NotSignificant
 getNotSignificantWords inh = do
   let words = map (map toLower) (splitOn "\n" inh)
   HashSet.fromList words
 
 
--- |La función getTitles obtiene los títulos, los convierte a minúsculas y los inserta en una lista.
+-- |Obtiene los títulos, los convierte en minúsculas y los inserta en una lista.
 getTitles :: [Char] -> [[[Char]]]
 getTitles inh = do
   let titles = map (map toLower) (splitOn "\n" inh)
   map (splitOn " ") titles
 
 
--- |La función cargarHash rellena el HashSet de palabras no significativa desde el archivo.
-getTitlesAux :: Handle -> [[[Char]]] -> IO [[[Char]]]
-getTitlesAux inh titles = do
-  ineof <- hIsEOF inh
-  if ineof
-    then do
-      return titles
-    else do
-      curTitle <- hGetLine inh
-      let minus = map toLower curTitle
-      let title = toWords minus
-      getTitlesAux inh (titles ++ [title])
-
-
--- |La función cargarHash rellena el HashSet de palabras no significativa desde el archivo.
-toWords :: [Char] -> [[Char]]
-toWords [] = []
-toWords (x : xs)
-  | x == ' ' = toWords (dropWhile (' ' ==) xs)
-  | otherwise = (x : takeWhile (' ' /=) xs) : toWords (dropWhile (' ' /=) xs)
-
-
--- |La función cargarHash rellena el HashSet de palabras no significativa desde el archivo.
+-- |Realiza las rotaciones de los títulos en las palabras significativas.
 titSigRotations :: NotSignificant -> [[Char]] -> [[[Char]]]
-titSigRotations notSignificants xs = [drop i xs ++ take i xs | i <- [0 .. n], not ((map toLower (xs !! i)) `elem` notSignificants)]
+titSigRotations notSignificants xs = [drop i xs ++ take i xs | i <- [0 .. n], not ( (xs !! i) `elem` notSignificants)]
   where
     n = (length xs) - 1
 
     
--- |La función cargarHash rellena el HashSet de palabras no significativa desde el archivo.
+-- |Coloca espacios (' ').
 putSpaces :: [[Char]] -> [Char]
 putSpaces xss = tail (concat (map (' ' :) xss))
 
 
--- |La función cargarHash rellena el HashSet de palabras no significativa desde el archivo.
+-- |Coloca ¨><¨ que se utiliza como separadores en las rotaciones.
 sep :: [[Char]] -> [[Char]]
 sep xs = init xs ++ [last xs ++ " ><"]
 
 
--- |La función cargarHash rellena el HashSet de palabras no significativa desde el archivo.
+-- |Genera el indice KWIC con sus respectivas rotaciones y formato.
 kwicTitles :: NotSignificant -> [[Char]] -> [[Char]]
 kwicTitles notS title =
   nub (map putSpaces (titSigRotations notS (sep title)))
 
 
--- |La función cargarHash rellena el HashSet de palabras no significativa desde el archivo.
+-- |Ordena los títulos alfabéticamente.
 sortTitles :: [Char] -> [Char] -> Ordering
-sortTitles = (\(x : xs) (y : ys) -> compare x y)
+sortTitles = (\(x) (y) -> compare x y)
 
 
--- |La función cargarHash rellena el HashSet de palabras no significativa desde el archivo.
+-- |Alínea las rotaciones en las letras mayúsculas.
 alignOn lines = map padline lines
   where
     partBeforechar = head . splitWhen isUpper
@@ -155,7 +132,7 @@ alignOn lines = map padline lines
         offset = longestLengthBeforeChar - (length (partBeforechar line))
    
 
--- |La función cargarHash rellena el HashSet de palabras no significativa desde el archivo.
+-- |Convierte a mayúsculas la palabra significativa que inicia la rotación.
 laMayus x = do
   let a = splitOn "><" x
   let b = splitOn " " (a !! 0)
